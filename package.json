@@ -1,6 +1,6 @@
 {
   "name": "json-container-treeview",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "json object/array treeview",
   "main": "json-container-treeview.js",
   "scripts": {
