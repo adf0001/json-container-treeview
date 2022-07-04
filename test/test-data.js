@@ -70,7 +70,6 @@ module.exports = {
 					options:
 						.dataset
 							map eid of tree-children/tree-container, to json container
-
 				*/
 				json_container_treeview.initView(container, dup(data));
 
