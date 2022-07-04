@@ -1,0 +1,45 @@
+.json-container-treeview .tree-node {
+	margin-top: 1px;
+}
+
+.json-container-treeview .tree-name {
+	font-weight: bold;
+	cursor: default;
+	display: inline-block;
+	min-width: 4em;
+}
+
+.json-container-treeview .tree-node.tree-selected>.tree-name.json-array-index {
+	background-color: lavender;
+}
+
+.json-container-treeview .tree-node.tree-selected.tree-selected-last>.tree-name.json-array-index {
+	background-color: lightgray;
+}
+
+.json-container-treeview .json-tree-value {
+	border-left: 0.5em solid white;
+	cursor: default;
+	display: inline-block;
+	min-width: 4em;
+	/*
+	max-width: 20em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	vertical-align: top;
+	white-space: nowrap;
+	*/
+}
+
+.json-container-treeview .json-tree-value.json-container {
+	color: #cccccc;
+}
+
+.json-container-treeview .tree-node.tree-selected>.json-tree-value {
+	background-color: lightgreen;
+}
+
+.json-container-treeview .tree-node.tree-selected>.json-tree-value.json-container {
+	background-color: lavender;
+	color: gray
+}
