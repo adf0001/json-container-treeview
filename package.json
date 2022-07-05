@@ -1,6 +1,6 @@
 {
   "name": "json-container-treeview",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "json object/array treeview",
   "main": "json-container-treeview.js",
   "scripts": {
@@ -22,6 +22,6 @@
   "homepage": "https://github.com/adf0001/json-container-treeview#readme",
   "dependencies": {
     "json-type-tool": "^0.1.3",
-    "treeview-model": "^1.0.13"
+    "treeview-model": "^1.0.14"
   }
 }
