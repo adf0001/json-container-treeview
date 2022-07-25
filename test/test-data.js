@@ -226,11 +226,12 @@ module.exports = {
 							json_container_treeview.clickContainer(container);
 						}
 					};
+
+				done(null);
 			},
 			json_container_treeview,
 			true
 		);
-		return "ui-test";
 	},
 
 };
