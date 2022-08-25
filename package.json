@@ -22,6 +22,6 @@
   "homepage": "https://github.com/adf0001/json-container-treeview#readme",
   "dependencies": {
     "json-type-tool": "^0.1.3",
-    "treeview-model": "^1.0.17"
+    "treeview-model": "^1.0.20"
   }
 }

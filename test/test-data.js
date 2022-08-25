@@ -93,7 +93,7 @@ module.exports = {
 
 				function toType(el, destType) {
 					var v = json_container_treeview.getDataValue(el);
-					json_container_treeview.update(el, { value: json_type_tool.convert(v, destType) });
+					return json_container_treeview.update(el, { value: json_type_tool.convert(v, destType) });
 				}
 
 				document.getElementById('sp-cmd-add').onclick =
@@ -128,95 +128,100 @@ module.exports = {
 
 						var newName = "t" + Math.round((new Date()).getTime() / 1000);
 						var newValue = (new Date()).toLocaleString();
-						var elNew;
+						var elNew, ret;
 
-						if (cmdId === "sp-cmd-add") {
-							elNew = json_container_treeview.add(elSelOne || container,
-								{ name: newName, value: newValue }, null, !elSelOne);
+						try {
+							if (cmdId === "sp-cmd-add") {
+								elNew = json_container_treeview.add(elSelOne || container,
+									{ name: newName, value: newValue }, null, !elSelOne);
+							}
+							else if (cmdId === "sp-cmd-add-object") {
+								elNew = json_container_treeview.add(elSelOne || container,
+									{ name: newName, value: dup(data) }, null, !elSelOne);
+							}
+							else if (cmdId === "sp-cmd-add-object-empty") {
+								elNew = json_container_treeview.add(elSelOne || container,
+									{ name: newName, value: {} }, null, !elSelOne);
+							}
+							else if (cmdId === "sp-cmd-add-array") {
+								elNew = json_container_treeview.add(elSelOne || container,
+									{ name: newName, value: dup(data.d) }, null, !elSelOne);
+							}
+							else if (cmdId === "sp-cmd-add-array-empty") {
+								elNew = json_container_treeview.add(elSelOne || container,
+									{ name: newName, value: [] }, null, !elSelOne);
+							}
+							else if (cmdId === "sp-cmd-insert") {
+								if (elSelOne) elNew = json_container_treeview.insert(elSelOne,
+									{ name: newName, value: newValue });
+							}
+							else if (cmdId === "sp-cmd-insert-json") {
+								if (elSelOne) elNew = json_container_treeview.insert(elSelOne,
+									{ name: newName, value: dup(data) }, null);
+							}
+							else if (cmdId === "sp-cmd-insert-next") {
+								if (elSelOne) elNew = json_container_treeview.insertNext(elSelOne,
+									{ name: newName, value: newValue });
+							}
+							else if (cmdId === "sp-cmd-insert-next-json") {
+								if (elSelOne) elNew = json_container_treeview.insertNext(elSelOne,
+									{ name: newName, value: dup(data) }, null);
+							}
+							else if (cmdId === "sp-cmd-remove") {
+								if (elSel) ret = json_container_treeview.remove(elSel);
+							}
+							else if (cmdId === "sp-cmd-remove-children") {
+								if (elSel) ret = json_container_treeview.removeChildren(elSel);
+							}
+							else if (cmdId === "sp-cmd-update") {
+								if (elSelOne) ret = json_container_treeview.update(elSelOne,
+									{ name: newName, value: newValue });
+							}
+							else if (cmdId === "sp-cmd-update-name") {
+								if (elSelOne) ret = json_container_treeview.update(elSelOne,
+									{ name: newName });
+							}
+							else if (cmdId === "sp-cmd-update-value") {
+								if (elSelOne) ret = json_container_treeview.update(elSelOne,
+									{ value: newValue });
+							}
+							else if (cmdId === "sp-cmd-update-value-object") {
+								if (elSelOne) ret = json_container_treeview.update(elSelOne,
+									{ value: dup(data) });
+							}
+							else if (cmdId === "sp-cmd-update-value-object-empty") {
+								if (elSelOne) ret = json_container_treeview.update(elSelOne,
+									{ value: {} });
+							}
+							else if (cmdId === "sp-cmd-update-value-array") {
+								if (elSelOne) ret = json_container_treeview.update(elSelOne,
+									{ value: dup(data.d) });
+							}
+							else if (cmdId === "sp-cmd-update-value-array-empty") {
+								if (elSelOne) ret = json_container_treeview.update(elSelOne,
+									{ value: [] });
+							}
+							else if (cmdId === "sp-cmd-to-string") {
+								if (elSelOne) ret = toType(elSelOne, "string");
+							}
+							else if (cmdId === "sp-cmd-to-number") {
+								if (elSelOne) ret = toType(elSelOne, "number");
+							}
+							else if (cmdId === "sp-cmd-to-boolean") {
+								if (elSelOne) ret = toType(elSelOne, "boolean");
+							}
+							else if (cmdId === "sp-cmd-to-object") {
+								if (elSelOne) ret = toType(elSelOne, "object");
+							}
+							else if (cmdId === "sp-cmd-to-array") {
+								if (elSelOne) ret = toType(elSelOne, "array");
+							}
+							else if (cmdId === "sp-cmd-to-other") {
+								if (elSelOne) ret = toType(elSelOne, "other");
+							}
 						}
-						else if (cmdId === "sp-cmd-add-object") {
-							elNew = json_container_treeview.add(elSelOne || container,
-								{ name: newName, value: dup(data) }, null, !elSelOne);
-						}
-						else if (cmdId === "sp-cmd-add-object-empty") {
-							elNew = json_container_treeview.add(elSelOne || container,
-								{ name: newName, value: {} }, null, !elSelOne);
-						}
-						else if (cmdId === "sp-cmd-add-array") {
-							elNew = json_container_treeview.add(elSelOne || container,
-								{ name: newName, value: dup(data.d) }, null, !elSelOne);
-						}
-						else if (cmdId === "sp-cmd-add-array-empty") {
-							elNew = json_container_treeview.add(elSelOne || container,
-								{ name: newName, value: [] }, null, !elSelOne);
-						}
-						else if (cmdId === "sp-cmd-insert") {
-							if (elSelOne) elNew = json_container_treeview.insert(elSelOne,
-								{ name: newName, value: newValue });
-						}
-						else if (cmdId === "sp-cmd-insert-json") {
-							if (elSelOne) elNew = json_container_treeview.insert(elSelOne,
-								{ name: newName, value: dup(data) }, null);
-						}
-						else if (cmdId === "sp-cmd-insert-next") {
-							if (elSelOne) elNew = json_container_treeview.insertNext(elSelOne,
-								{ name: newName, value: newValue });
-						}
-						else if (cmdId === "sp-cmd-insert-next-json") {
-							if (elSelOne) elNew = json_container_treeview.insertNext(elSelOne,
-								{ name: newName, value: dup(data) }, null);
-						}
-						else if (cmdId === "sp-cmd-remove") {
-							if (elSel) json_container_treeview.remove(elSel);
-						}
-						else if (cmdId === "sp-cmd-remove-children") {
-							if (elSel) json_container_treeview.removeChildren(elSel);
-						}
-						else if (cmdId === "sp-cmd-update") {
-							if (elSelOne) json_container_treeview.update(elSelOne,
-								{ name: newName, value: newValue });
-						}
-						else if (cmdId === "sp-cmd-update-name") {
-							if (elSelOne) json_container_treeview.update(elSelOne,
-								{ name: newName });
-						}
-						else if (cmdId === "sp-cmd-update-value") {
-							if (elSelOne) json_container_treeview.update(elSelOne,
-								{ value: newValue });
-						}
-						else if (cmdId === "sp-cmd-update-value-object") {
-							if (elSelOne) json_container_treeview.update(elSelOne,
-								{ value: dup(data) });
-						}
-						else if (cmdId === "sp-cmd-update-value-object-empty") {
-							if (elSelOne) json_container_treeview.update(elSelOne,
-								{ value: {} });
-						}
-						else if (cmdId === "sp-cmd-update-value-array") {
-							if (elSelOne) json_container_treeview.update(elSelOne,
-								{ value: dup(data.d) });
-						}
-						else if (cmdId === "sp-cmd-update-value-array-empty") {
-							if (elSelOne) json_container_treeview.update(elSelOne,
-								{ value: [] });
-						}
-						else if (cmdId === "sp-cmd-to-string") {
-							if (elSelOne) toType(elSelOne, "string");
-						}
-						else if (cmdId === "sp-cmd-to-number") {
-							if (elSelOne) toType(elSelOne, "number");
-						}
-						else if (cmdId === "sp-cmd-to-boolean") {
-							if (elSelOne) toType(elSelOne, "boolean");
-						}
-						else if (cmdId === "sp-cmd-to-object") {
-							if (elSelOne) toType(elSelOne, "object");
-						}
-						else if (cmdId === "sp-cmd-to-array") {
-							if (elSelOne) toType(elSelOne, "array");
-						}
-						else if (cmdId === "sp-cmd-to-other") {
-							if (elSelOne) toType(elSelOne, "other");
+						catch (ex) {
+							console.log(ex + "");
 						}
 
 						if (elNew && !json_container_treeview.isSelectedMultiple(elNew)) {
