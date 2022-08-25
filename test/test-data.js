@@ -1,6 +1,6 @@
 
 //global variable, for html page, refer tpsvr @ npm.
-json_container_treeview = require("../json-container-treeview.js");
+json_container_treeview = require("../index.js");
 var json_type_tool = require("json-type-tool");
 
 base_test_data = require("treeview-model/test/test-data.js");

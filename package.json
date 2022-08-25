@@ -1,8 +1,8 @@
 {
   "name": "json-container-treeview",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "json object/array treeview",
-  "main": "json-container-treeview.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
