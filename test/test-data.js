@@ -238,6 +238,19 @@ module.exports = {
 			true
 		);
 	},
+	
+	"check exports": function (done) {
+		var m= json_container_treeview;
+		for (var i in m) {
+			if (typeof m[i] === "undefined") { done("undefined: " + i); return; }
+		}
+		done(false);
+
+		console.log(m);
+		var list = "export list: " + Object.keys(m).join(", ");
+		console.log(list);
+		return list;
+	},
 
 };
 
